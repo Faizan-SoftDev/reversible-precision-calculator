@@ -18,7 +18,6 @@ function App() {
     setResult(null);
 
     try {
-      // OOP Abstraction: Delegates math logic to PrecisionEngine
       const calculationResult = PrecisionEngine.process(
         formData.numerator,
         formData.denominator
