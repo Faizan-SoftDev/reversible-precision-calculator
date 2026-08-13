@@ -1,38 +1,19 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+body { background: #f0f2f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+.container { width: 100%; max-width: 440px; padding: 20px; }
+.card { background: #ffffff; padding: 30px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
+h2 { color: #1a1a1a; font-size: 22px; text-align: center; }
+.subtitle { color: #666; font-size: 13px; text-align: center; margin-bottom: 24px; }
+.form-group { margin-bottom: 16px; }
+label { display: block; font-size: 14px; font-weight: 600; color: #444; margin-bottom: 6px; }
+input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 16px; outline: none; }
+input:focus { border-color: #0066ff; }
+button { width: 100%; padding: 12px; background: #0066ff; color: white; border: none; border-radius: 6px; font-size: 16px; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+button:hover { background: #0052cc; }
+button:disabled { background: #a0c4ff; }
+.error-box { margin-top: 16px; padding: 12px; background: #ffe6e6; color: #cc0000; border-radius: 6px; font-size: 14px; text-align: center; }
+.result-card { margin-top: 24px; padding: 16px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0; }
+.result-card h3 { font-size: 16px; margin-bottom: 12px; color: #334155; }
+.result-row { display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 8px; color: #475569; }
+.result-row.highlight { font-size: 15px; margin-top: 8px; padding-top: 8px; border-top: 1px dashed #cbd5e1; color: #0f172a; }
+.result-row.highlight strong { color: #16a34a; }
