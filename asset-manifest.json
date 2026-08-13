@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/reversible-precision-calculator/static/css/main.6d02267e.css",
+    "main.js": "/reversible-precision-calculator/static/js/main.ae15667d.js",
+    "index.html": "/reversible-precision-calculator/index.html",
+    "main.6d02267e.css.map": "/reversible-precision-calculator/static/css/main.6d02267e.css.map",
+    "main.ae15667d.js.map": "/reversible-precision-calculator/static/js/main.ae15667d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6d02267e.css",
+    "static/js/main.ae15667d.js"
+  ]
+}
