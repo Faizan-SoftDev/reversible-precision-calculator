@@ -1,52 +1,68 @@
 import React, { useState } from 'react';
 import './App.css';
 
-function App() {
-  const [inputs, setInputs] = useState({ numerator: '100', denominator: '3' });
-  const [result, setResult] = useState(null);
-  const [error, setError] = useState('');
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setInputs((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleCalculate = (e) => {
-    e.preventDefault();
-    setError('');
-    setResult(null);
-
-    const num = Number(inputs.numerator);
-    const den = Number(inputs.denominator);
+/**
+ * OOP Module: PrecisionEngine
+ * Encapsulates math operations, precision scaling, and validation rules.
+ */
+class PrecisionEngine {
+  static calculateAndRevert(numerator, denominator, precision = 2) {
+    const num = Number(numerator);
+    const den = Number(denominator);
 
     if (isNaN(num) || isNaN(den)) {
-      setError('Please enter valid numeric values.');
-      return;
+      throw new Error('Please enter valid numeric inputs.');
     }
 
     if (den === 0) {
-      setError('Denominator cannot be zero.');
-      return;
+      throw new Error('Division by zero is undefined.');
     }
 
     const divisionVal = num / den;
 
     if (!isFinite(divisionVal)) {
-      setError('Calculation resulted in an invalid number.');
-      return;
+      throw new Error('Result exceeded valid numeric boundaries.');
     }
 
-    // 2 Decimal places display
-    const formattedDivision = divisionVal.toFixed(2);
-    // Exact Reversion Logic
-    const restoredVal = Math.round(parseFloat(formattedDivision) * den);
+    // Precision Display Formatter
+    const divisionDisplay = divisionVal.toFixed(precision);
 
-    setResult({
+    // Exact Mathematical Reversion Engine
+    const restoredResult = Math.round(parseFloat(divisionDisplay) * den);
+
+    return {
       originalNumerator: num,
       originalDenominator: den,
-      divisionDisplay: formattedDivision,
-      restoredResult: restoredVal,
-    });
+      divisionDisplay,
+      restoredResult,
+    };
+  }
+}
+
+function App() {
+  const [formData, setFormData] = useState({ numerator: '100', denominator: '3' });
+  const [result, setResult] = useState(null);
+  const [error, setError] = useState('');
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    setError('');
+    setResult(null);
+
+    try {
+      const calculation = PrecisionEngine.calculateAndRevert(
+        formData.numerator,
+        formData.denominator
+      );
+      setResult(calculation);
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
   return (
@@ -55,7 +71,7 @@ function App() {
         <h2>Reversible Precision Calculator</h2>
         <p className="subtitle">Company Assessment Project</p>
 
-        <form onSubmit={handleCalculate}>
+        <form onSubmit={handleFormSubmit}>
           <div className="form-group">
             <label htmlFor="numerator">First Value (Numerator)</label>
             <input
@@ -63,7 +79,7 @@ function App() {
               name="numerator"
               type="number"
               step="any"
-              value={inputs.numerator}
+              value={formData.numerator}
               onChange={handleInputChange}
               placeholder="e.g. 100"
               required
@@ -77,7 +93,7 @@ function App() {
               name="denominator"
               type="number"
               step="any"
-              value={inputs.denominator}
+              value={formData.denominator}
               onChange={handleInputChange}
               placeholder="e.g. 3"
               required
